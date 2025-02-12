@@ -1,0 +1,79 @@
+{
+  "students": [
+    {
+      "id": "1",
+      "name": "John",
+      "location": "india",
+      "phone": "1234567890",
+      "courses": [
+        "Java",
+        "Selenium"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Kim",
+      "location": "US",
+      "phone": "98876543213",
+      "courses": [
+        "Python",
+        "Appium"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Smith",
+      "location": "Canada",
+      "phone": "165498765",
+      "courses": [
+        "C#",
+        "RestAPI"
+      ]
+    },
+    {
+      "id": "66a2",
+      "courses": [
+        "C",
+        "C++"
+      ],
+      "phone": "0123456789",
+      "name": "Abdallah",
+      "location": "Egypt"
+    },
+    {
+      "id": "be27",
+      "name": "Abdallah",
+      "location": "Egypt",
+      "phone": "0123456789",
+      "courses": [
+        "C",
+        "C++"
+      ]
+    },
+    {
+      "id": "d1e6",
+      "name": "Abdallah",
+      "location": "Egypt",
+      "phone": "0123456789",
+      "courses": [
+        "C",
+        "C++"
+      ]
+    },
+    {
+      "id": "f656",
+      "empty": false,
+      "mapType": "java.util.HashMap"
+    },
+    {
+      "id": "dc82",
+      "courses": [
+        "C",
+        "C++"
+      ],
+      "phone": "0123456789",
+      "name": "Abdallah",
+      "location": "Egypt"
+    }
+  ]
+}
