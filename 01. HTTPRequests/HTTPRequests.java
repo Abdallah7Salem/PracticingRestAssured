@@ -2,10 +2,7 @@ package day1;
 
 import org.testng.annotations.Test;
 
-import com.jayway.jsonpath.JsonPath;
-
 import static io.restassured.RestAssured.*;
-import static io.restassured.matcher.RestAssuredMatchers.*;
 import static org.hamcrest.Matchers.*;
 
 import java.util.HashMap;
@@ -15,7 +12,7 @@ import java.util.HashMap;
 
 public class HTTPRequests {
 
-	int id;
+	int userId;
 	
 	@Test (priority = 1)
 	void getUsers()
@@ -28,6 +25,7 @@ public class HTTPRequests {
 		.then()
 			.statusCode(200)
 			.body("page", equalTo(2))
+			.time(lessThan(2000L))
 			.log().all();
 	}
 	
@@ -38,15 +36,19 @@ public class HTTPRequests {
 		data.put("name", "Abdallah");
 		data.put("job", "Software Tester");
 		
-		id=given()
+		userId=given()
 			.contentType("application/json")
 			.body(data)
 		.when()
 			.post("https://reqres.in/api/users")
-			.jsonPath().getInt("id");
-//		.then()
-//			.statusCode(201)
-//			.log().all();
+		.then()
+			.statusCode(201)
+			.time(lessThan(2000L))
+			.body("name", equalTo("Abdallah"))
+			.body("job", equalTo("Software Tester"))
+			.body(containsString("id"))
+			.log().all()
+			.extract().jsonPath().getInt("id");
 	}
 	
 	@Test (priority = 3, dependsOnMethods = {"createUser"})
@@ -60,21 +62,26 @@ public class HTTPRequests {
 			.contentType("application/json")
 			.body(data)
 		.when()
-			.put("https://reqres.in/api/users/" + id)
+			.put("https://reqres.in/api/users/" + userId)
 		.then()
 			.statusCode(200)
+			.time(lessThan(2000L))
+			.body("name", equalTo("Abdallah Qandil"))
+			.body("job", equalTo("Software Testing Engineer"))
 			.log().all();
 	}
 	
-	@Test (priority = 4)
+	@Test (priority = 4, dependsOnMethods = {"createUser", "updateUser"})
 	void deleteUser()
 	{
 		given()
 		
 		.when()
-			.delete("https://reqres.in/api/users"+id)
+			.delete("https://reqres.in/api/users" + userId)
 		.then()
 			.statusCode(204)
+			.time(lessThan(2000L))
+			.body(emptyOrNullString())
 			.log().all();
 	}	
 	
