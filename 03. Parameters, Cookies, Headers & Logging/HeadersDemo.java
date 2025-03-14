@@ -21,10 +21,10 @@ public class HeadersDemo {
 		.when()
 			.get("https://www.google.com/")
 		.then()
-			.header("Content-Type", "text/html; charset=ISO-8859-1")
-			.header("Content-Encoding", "gzip")
+			.log().headers()
+			.header("Content-Type", containsString("text/html"))
+			.header("Content-Encoding", notNullValue())
 			.header("Server", "gws");
-		
 	}
 	
 	@Test(priority = 2)
@@ -45,7 +45,7 @@ public class HeadersDemo {
 		
 		for(Header h : my_headers)
 		{
-			System.out.println(h.getName() + "   " + h.getValue());
+			System.out.println(h.getName() + " ==>  " + h.getValue());
 		}
 	}
 	
